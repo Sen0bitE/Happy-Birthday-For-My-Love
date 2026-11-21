@@ -375,8 +375,9 @@
       color: #fff;
       font-family: 'Comfortaa', sans-serif;
       font-weight: 700;
-      font-size: 16px;
-      padding: 13px 16px;
+      font-size: 15.5px;
+      line-height: 1.45;
+      padding: 14px 16px;
       border-radius: 16px;
       margin: 12px 0 16px;
       box-shadow: 0 8px 18px rgba(157, 107, 255, 0.28);
@@ -528,7 +529,6 @@
       border-bottom: none;
       border-radius: 54px 54px 0 0;
       box-shadow: inset 0 3px 6px rgba(255,255,255,0.9), 0 4px 10px rgba(72, 41, 56, 0.2);
-      /* Ось разворота по центру левой ножки дужки */
       transform-origin: 7px bottom;
       -webkit-transform-origin: 7px bottom;
       transform-style: preserve-3d;
@@ -536,7 +536,6 @@
       transition: transform 0.72s cubic-bezier(0.34, 1.45, 0.64, 1), border-color 0.35s ease;
     }
 
-    /* Длинная левая ножка дужки, которая остаётся в корпусе при развороте */
     .padlock-shackle::before {
       content: '';
       position: absolute;
@@ -761,63 +760,9 @@
 
     .final-stash-card .place {
       font-family: 'Comfortaa', sans-serif;
-      font-size: 19px;
+      font-size: 18px;
+      line-height: 1.4;
       font-weight: 700;
-    }
-
-    /* ================= ПАНЕЛЬ ТЕСТИРОВАНИЯ ================= */
-    .test-toggle-btn {
-      position: fixed;
-      top: calc(var(--safe-top) + 6px);
-      right: 12px;
-      z-index: 1000;
-      background: rgba(72, 41, 56, 0.85);
-      color: #fff;
-      border: none;
-      border-radius: 999px;
-      padding: 7px 12px;
-      font-size: 12px;
-      font-weight: 700;
-      backdrop-filter: blur(8px);
-      cursor: pointer;
-    }
-
-    .test-drawer {
-      display: none;
-      position: fixed;
-      top: calc(var(--safe-top) + 42px);
-      right: 12px;
-      width: 240px;
-      background: rgba(45, 25, 36, 0.95);
-      color: #fff;
-      border-radius: 18px;
-      padding: 12px;
-      z-index: 1000;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-      font-size: 12px;
-    }
-
-    .test-drawer.open {
-      display: block;
-    }
-
-    .test-drawer button {
-      width: 100%;
-      margin-top: 6px;
-      padding: 8px 10px;
-      border: none;
-      border-radius: 10px;
-      background: rgba(255,255,255,0.14);
-      color: #fff;
-      font-weight: 700;
-      font-size: 12px;
-      text-align: left;
-      cursor: pointer;
-    }
-
-    .test-drawer button.highlight {
-      background: var(--primary);
-      text-align: center;
     }
 
     .shake {
@@ -839,18 +784,6 @@
 
   <!-- Холст для конфетти -->
   <canvas id="confetti-canvas"></canvas>
-
-  <!-- Тестовая панель (отключается через TEST_MODE: false) -->
-  <button class="test-toggle-btn" id="test-toggle-btn" onclick="toggleTestDrawer()">🛠 Тест</button>
-  <div class="test-drawer" id="test-drawer">
-    <div style="font-weight:800; margin-bottom:4px; color:#ff9ebc;">Быстрая проверка этапов:</div>
-    <button onclick="goToScreen('screen-welcome')">1. Приветствие</button>
-    <button onclick="goToScreen('screen-question')">2. Вопрос (18.01.2024)</button>
-    <button onclick="goToScreen('screen-suitcase')">3. Чемоданчик и тайник</button>
-    <button onclick="goToScreen('screen-lock')">4. Подарок с замком (041824)</button>
-    <button onclick="goToScreen('screen-final')">5. Финальное поздравление</button>
-    <button class="highlight" onclick="autoSolveCurrentStep()">⚡ Автоответ / Открыть этап</button>
-  </div>
 
   <div class="app-wrapper">
 
@@ -888,7 +821,7 @@
       <div class="hint-box" id="q-hint"></div>
     </section>
 
-    <!-- ЭКРАН 3: ЧЕМОДАНЧИК И ПОДСКАЗКА ПРО ТАЙНИК ВКУСНЯШЕК -->
+    <!-- ЭКРАН 3: ЧЕМОДАНЧИК И ПОДСКАЗКА ПРО ПЕРВЫЙ ПОДАРОЧЕК -->
     <section class="screen" id="screen-suitcase">
       <div class="badge">Ура! Верный ответ 🎉</div>
       <h2>Нажми на чемоданчик, чтобы открыть его!</h2>
@@ -916,10 +849,10 @@
           Поздравляю с первым пройденным этапом! Ты прекрасно помнишь наши важные моменты.
         </p>
         <div class="stash-pill" id="suitcase-stash-text">
-          🍬 Ищи в своём тайнике вкусняшек!
+          🍬 Твой первый подарочек и ключ для продолжения квеста лежат там, где ты хранишь сладость!
         </div>
         <p style="font-size: 13.5px; margin-bottom: 14px;">
-          Там тебя ждёт карта сокровищ! Пройди по точкам <b>от 1 до 6</b>, собери все цифры и возвращайся сюда 👇
+          Проходи по точкам на карте <b>от 1 до 6</b>, собери все цифры и возвращайся сюда 👇
         </p>
         <button class="btn" onclick="goToScreen('screen-lock')">
           Я нашла карту! К замку 🔐
@@ -930,7 +863,7 @@
     <!-- ЭКРАН 4: ПОДАРОК С КРУТЯЩИМСЯ КОДОВЫМ ЗАМКОМ -->
     <section class="screen" id="screen-lock">
       <div class="badge">Шаг 2 из 2 • Секретный шифр</div>
-      <h2 style="margin-bottom: 4px;">Открой главный подарок!</h2>
+      <h2 style="margin-bottom: 4px;">Открой финальный подарочек!</h2>
       <p style="font-size: 14px; margin-bottom: 6px;">
         Покрути колёсики с цифрами в порядке точек <b>1 → 6</b> с карты
       </p>
@@ -974,7 +907,7 @@
       <div class="love-letter-box" id="final-love-letter"></div>
 
       <div class="final-stash-card">
-        <div class="title">🎁 Твой главный подарок ждёт тебя здесь:</div>
+        <div class="title">🎁 Твой финальный подарочек ждёт тебя здесь:</div>
         <div class="place" id="final-gift-location"></div>
       </div>
     </section>
@@ -986,9 +919,6 @@
     // НАСТРОЙКИ КВЕСТА (МЕНЯЙ ВСЁ ЗДЕСЬ)
     // =========================================================================
     const CONFIG = {
-      // Поставь false перед тем, как дать телефон имениннице, чтобы скрыть кнопку "🛠 Тест"
-      TEST_MODE: true,
-
       // 1. Первый вопрос (ответ: 18.01.2024)
       FIRST_QUESTION: {
         title: "С какого важного дня началась наша особенная история?",
@@ -1008,13 +938,13 @@
       SUITCASE: {
         praiseTitle: "Ты умничка! 🥰",
         praiseText: "С Днём Рождения ещё раз! Ты так легко справилась с первым заданием, потому что наше начало навсегда в сердечке.",
-        stashText: "🍬 Ищи в своём тайнике вкусняшек!"
+        stashText: "🍬 Твой первый подарочек и ключ для продолжения квеста лежат там, где ты хранишь сладость!"
       },
 
       // 3. Код с карты квартиры (точки 1 -> 6)
       SECRET_CODE: "041824",
 
-      // 4. Финальное большое поздравление и тайник главного подарка
+      // 4. Финальное большое поздравление и тайник последнего подарочка
       FINAL: {
         loveLetter:
 `Моя самая нежная, красивая и родная девочка!
@@ -1024,7 +954,7 @@
 Пусть в твоей жизни будет как можно больше поводов для искренней радости, пусть исполняются самые заветные мечты, а я всегда буду рядом, чтобы обнимать, поддерживать и делать тебя счастливой.
 
 Я очень сильно тебя люблю! 💖`,
-        giftLocation: "В шкафу на верхней полке под пледом 🎀"
+        giftLocation: "Там, где лежат зимние принадлежности ❄️🧣"
       }
     };
 
@@ -1038,11 +968,6 @@
     let isGiftOpened = false;
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Скрыть или показать тестовую панель
-      if (!CONFIG.TEST_MODE) {
-        document.getElementById("test-toggle-btn").style.display = "none";
-      }
-
       // Заполнить тексты из CONFIG
       document.getElementById("q-title").textContent = CONFIG.FIRST_QUESTION.title;
       document.getElementById("q-subtitle").textContent = CONFIG.FIRST_QUESTION.subtitle;
@@ -1089,7 +1014,6 @@
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       const target = document.getElementById(screenId);
       if (target) target.classList.add("active");
-      document.getElementById("test-drawer").classList.remove("open");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -1218,7 +1142,7 @@
       el.textContent = dialValues[index];
 
       el.classList.remove("spin-up", "spin-down");
-      void el.offsetWidth; // перезапуск анимации
+      void el.offsetWidth;
       el.classList.add(delta > 0 ? "spin-up" : "spin-down");
 
       if (navigator.vibrate) navigator.vibrate(12);
@@ -1272,7 +1196,7 @@
       setTimeout(() => {
         giftBox.classList.add("ready-to-open");
         banner.classList.add("ready");
-        banner.innerHTML = "🎁 Замок снят!<br>Теперь нажми на подарок, чтобы открыть его ✨";
+        banner.innerHTML = "🎁 Замок снят!<br>Теперь нажми на подарочек, чтобы открыть его ✨";
       }, 320);
     }
 
@@ -1287,7 +1211,7 @@
 
       giftBox.classList.remove("ready-to-open");
       banner.classList.remove("ready");
-      banner.textContent = "Ура!! Открываем твой подарок... ✨";
+      banner.textContent = "Ура!! Открываем твой последний подарочек... ✨";
 
       if (navigator.vibrate) navigator.vibrate([60, 50, 120]);
       lid.classList.add("fly-away");
@@ -1361,45 +1285,6 @@
         }
       }
       animate();
-    }
-
-    // =========================================================================
-    // ТЕСТОВЫЙ РЕЖИМ (УПРАВЛЕНИЕ)
-    // =========================================================================
-    function toggleTestDrawer() {
-      document.getElementById("test-drawer").classList.toggle("open");
-    }
-
-    function autoSolveCurrentStep() {
-      const active = document.querySelector(".screen.active");
-      if (!active) return;
-
-      if (active.id === "screen-welcome") {
-        goToScreen("screen-question");
-      } else if (active.id === "screen-question") {
-        document.getElementById("q-input").value = "18.01.2024";
-        checkFirstQuestion();
-      } else if (active.id === "screen-suitcase") {
-        if (!isSuitcaseOpened) {
-          openSuitcase();
-        } else {
-          goToScreen("screen-lock");
-        }
-      } else if (active.id === "screen-lock") {
-        if (!isLockPopped) {
-          const digits = CONFIG.SECRET_CODE.split("").map(Number);
-          digits.forEach((d, idx) => {
-            dialValues[idx] = d;
-            document.getElementById(`dial-digit-${idx}`).textContent = d;
-          });
-          popLockShackle();
-        } else if (!isLockRemoved) {
-          dismissPadlock();
-        } else if (!isGiftOpened) {
-          openUnlockedGift();
-        }
-      }
-      document.getElementById("test-drawer").classList.remove("open");
     }
   </script>
 </body>
